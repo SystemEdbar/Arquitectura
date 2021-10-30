@@ -17,9 +17,9 @@ Route::get('/', function () {return view('welcome');});
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
 //Clientes
-Route::get('clientes', [\App\Http\Controllers\clientes\ClientesController::class,'index'])->name('clientes');
-Route::get('clientes/crear', [\App\Http\Controllers\clientes\ClientesController::class,'create'])->name('clientes.crear');
-Route::post('clientes/guardar', [\App\Http\Controllers\clientes\ClientesController::class,'guardado'])->name('clientes.guardar');
+Route::get('paqueteria', [\App\Http\Controllers\CajasController::class,'index'])->name('clientes');
+Route::get('paqueteria/crear', [\App\Http\Controllers\clientes\ClientesController::class,'create'])->name('clientes.crear');
+Route::post('paqueteria/guardar', [\App\Http\Controllers\clientes\ClientesController::class,'guardado'])->name('clientes.guardar');
 
 
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h4 class="font-semibold text-xl text-gray-800 leading-tight">
-            Bienvendio al Menu de Clientes
+            Bienvendio al Menu de Cajas
         </h4>
     </x-slot>
 
@@ -10,58 +10,80 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
-    <div class="py-12">
+    <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="py-20" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 @include('includes.mensaje')
                                 <div class="card card-outline card-success">
                                     <div class="card-header">
                                         <h4 class="font-semibold text-xl text-gray-800 leading-tight">
-                                            Clientes
+                                            Clasificación de Cajas
                                         </h4>
                                         <div class="card-tools">
-                                            <div style: align="right">
-                                                <a href="{{route('clientes.crear')}}" class="btn btn-block btn-success btn-sm">
-                                                    Registrar un Cliente nuevo <i class="fa fa-fw fa-plus-circle pl-1"></i></a>
-                                            </div>
                                         </div>
                                     </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class='thead-dark '>
+                        <table class="table table-striped table-hover" id="datable">
+                            <thead class='table-dark' style="height: 50px">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Email</th>&nbsp
-                                <th scope="col">Domicilio</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-
+                                <th scope="col">Código Interno</th>
+                                <th scope="col">Color de Caja</th>
+                                <th scope="col">Cantidad</th>
                             </thead>
                             <tbody>
-                            @foreach($clientes as $cli)
-                                <tr>
-                                    <td>{{$cli->cli_id}}</td>
-                                    <td>{{$cli->cli_name}}</td>
-                                    <td>{{$cli->cli_apellido}}</td>
-                                    <td>{{$cli->cli_telefono}}</td>
-                                    <td>{{$cli->cli_email}}</td>
-                                    <td>{{$cli->cli_domicilio}}</td>
-                                    <td>
-                                        <div><a href="" class="btn-accion-tabla mr-4" data-toggle="tooltip" title="Editar este registro">
-                                                <i class="far fa-edit"></i></a></div>
-                                    </td>
-                                    <td>
-                                        <div> <a href="" class="btn-accion-tabla eliminar-registro" data-toggle="tooltip" title="Eliminar este registro">
-                                                <i class="text-danger far fa-trash-alt"></i></a></div>
-                                    </td>
+                            @foreach($cajas as $caja)
+                                <tr @if($caja->caja_id == 1) class="table-primary" @else class="table-success" @endif>
+                                    <td>{{$caja->caja_id}}</td>
+                                    <td>{{$caja->caja_color}}</td>
+                                    <td>{{$caja->caja_cantidad}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <script>
+                            $(document).ready(function()
+                            {
+                                swal("Registro Guardado", "La Caja ha sido Actualizada", "success");
+                                $('#datable').DataTable(
+                                    {
+                                        "language": {
+                                            "decimal":        "",
+                                            "emptyTable":     "No hay datos disponibles para la tabla",
+                                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                                            "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                                            "infoFiltered":   "(filtrado de _MAX_ registros totales)",
+                                            "infoPostFix":    "",
+                                            "thousands":      ",",
+                                            "lengthMenu":     "Mostrando _MENU_ registros por página",
+                                            "loadingRecords": "Cargando...",
+                                            "processing":     "Procesando...",
+                                            "search":         "Búsqueda:",
+                                            "zeroRecords":    "No se encontraron registros que cumplan el criterio",
+                                            "paginate": {
+                                                "first":      "Primero",
+                                                "last":       "Último",
+                                                "next":       "Siguiente",
+                                                "previous":   "Previo"
+                                            },
+                                            "aria": {
+                                                "sortAscending":  ": Activar ordenamiento ascendente",
+                                                "sortDescending": ": Activar ordenamiento descendente"
+                                            }
+                                        }
+                                    }
+                                );
+                            } );
+
+                        </script>
                     </div>
                 </div>
                                 </div>

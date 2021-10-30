@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top">
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top" >
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand me-4" href="{{ route('dashboard') }}">
@@ -13,7 +13,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <x-jet-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Clientes') }}
+                    {{ __('Historial de Paquetes') }}
                 </x-jet-nav-link>
             </ul>
 
