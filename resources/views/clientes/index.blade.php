@@ -40,12 +40,12 @@
                             </thead>
                             <tbody>
                             @foreach($cajas as $caja)
-                                <tr @if($caja->caja_id == 1) class="table-primary" @else class="table-success" @endif>
+                                <tr @if($caja->caja_id == 1) class="table-primary" @elseif($caja->caja_id == 2) class="table-success" @else class="table-danger" @endif>
                                     <td>{{$caja->caja_id}}</td>
                                     <td>{{$caja->caja_color}}</td>
                                     <td>{{$caja->caja_cantidad}}</td>
                                 </tr>
-                                @endforeach
+                            @endforeach
                             </tbody>
                         </table>
 
